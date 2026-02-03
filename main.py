@@ -16,22 +16,28 @@ def home():
 def introduction():
     return render_template("introduction.html")
 
-@_app.route("/toggle_led1", methods=["POST"])
+@_app.route("/toggle_led1", methods=["GET", "POST"])
 def toggle_led1():
+    print("Toggle LED1 called")
     result = light_control(status="toggle", led="1")
+    print(f"Result: {result}")
     return jsonify({"message": result["content"]})
 
-@_app.route("/toggle_led2", methods=["POST"])
+@_app.route("/toggle_led2", methods=["GET", "POST"])
 def toggle_led2():
+    print("Toggle LED2 called")
     result = light_control(status="toggle", led="2")
+    print(f"Result: {result}")
     return jsonify({"message": result["content"]})
 
-@_app.route("/control_all", methods=["POST"])
+@_app.route("/control_all", methods=["GET", "POST"])
 def control_all():
     action = request.args.get("action", "off")
+    print(f"Control all called with action: {action}")
     if action not in ["on", "off"]:
         action = "off"
     result = light_control(status=action, led="all")
+    print(f"Result: {result}")
     return jsonify({"message": result["content"]})
 def botController():
     req: dict = request.get_json()
