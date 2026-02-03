@@ -12,6 +12,37 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Điều khiển đèn</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Điều khiển đèn</h5>
+                    <button class="btn btn-primary m-2" onclick="toggleLed(1)">Tắt/Mở đèn 1</button>
+                    <button class="btn btn-primary m-2" onclick="toggleLed(2)">Tắt/Mở đèn 2</button>
+                    <br>
+                    <button class="btn btn-success m-2" onclick="controlAll('on')">Mở tất cả đèn</button>
+                    <button class="btn btn-danger m-2" onclick="controlAll('off')">Tắt tất cả đèn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+function toggleLed(led) {
+    fetch(`/toggle_led${led}`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+}
 
+function controlAll(action) {
+    fetch(`/control_all?action=${action}`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+}
+</script>
 {% endblock %}
