@@ -1,0 +1,7 @@
+tunnel: 88b57ce8-0704-46c4-873a-68c90f5e37e7
+credentials-file: C:\Users\ASUS\.cloudflared\88b57ce8-0704-46c4-873a-68c90f5e37e7.json
+
+ingress:
+  - hostname: esp.hotrotuyensinh2025.click
+    service: http://10.216.4.134:80
+  - service: http_status:404
